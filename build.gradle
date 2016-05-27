@@ -29,6 +29,7 @@ repositories {
 
 sourceSets {
     main.kotlin.srcDirs += 'src/main/kotlin'
+//    main.resources.srcDirs += 'src/main/resources'
 }
 
 bintray {
@@ -42,10 +43,17 @@ bintray {
 
         version {
             name = project.version
-          /*  released = new Date()*/
             vcsTag = "v${project.version}"
         }
     }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.livemaster.longtowords.MainKt'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 task sourcesJar(type: Jar, dependsOn: project.classes) {

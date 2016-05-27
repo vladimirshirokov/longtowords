@@ -4,7 +4,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -20,7 +19,6 @@ group 'ru.livemaster'
 version '0.1'
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.2"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 repositories {
@@ -29,7 +27,6 @@ repositories {
 
 sourceSets {
     main.kotlin.srcDirs += 'src/main/kotlin'
-//    main.resources.srcDirs += 'src/main/resources'
 }
 
 bintray {
@@ -56,30 +53,11 @@ jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
-task sourcesJar(type: Jar, dependsOn: project.classes) {
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: project.javadoc) {
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar, javadocJar
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId project.bintray.pkg.name
             from components.java
-
-            artifact sourcesJar {
-                classifier = 'sources'
-            }
-            artifact javadocJar {
-                classifier = 'javadoc'
-            }
         }
     }
 }

@@ -19,8 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="LongToWords_main" target="1.8" />
-      <module name="LongToWords_test" target="1.8" />
+      <module name="LongToWords_main" target="1.7" />
+      <module name="LongToWords_test" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
